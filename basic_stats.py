@@ -1,11 +1,6 @@
 
 # coding: utf-8
 
-<<<<<<< HEAD
-=======
-# In[8]:
-
->>>>>>> 94f439b44e12fc3c29604ad2f5991a6e5938a5eb
 
 from pyspark import SparkConf, SparkContext
 from pyspark.sql.functions import *
@@ -18,21 +13,8 @@ import sys
 from pyspark.sql.functions import countDistinct
 
 
-<<<<<<< HEAD
 
 input_data = sys.argv[1]
-=======
-# In[9]:
-
-
-input_data = sys.argv[1]
-# input_data = "gs://ds-taste-dfp/aggregated_data/*.parquet"
-
-
-
-# In[10]:
-
->>>>>>> 94f439b44e12fc3c29604ad2f5991a6e5938a5eb
 
 # reading data 
 if input_data[-3:] == 'csv':
@@ -42,22 +24,11 @@ elif input_data[-3:] == 'txt':
 else:
     df = sqlContext.read.parquet(input_data)
 
-<<<<<<< HEAD
-=======
-
-# In[12]:
-
-
->>>>>>> 94f439b44e12fc3c29604ad2f5991a6e5938a5eb
 #Statistics
 
 print "Data schema :",df.columns,"\n"
 print "Data Types :",[(c.name,c.dataType) for c in df.schema.fields]
-<<<<<<< HEAD
 print "\n"
-=======
-
->>>>>>> 94f439b44e12fc3c29604ad2f5991a6e5938a5eb
 print "Total records in the data :",df.count(),"\n"
 print "Distinct records :", df.distinct().count(),"\n"
 print "\n","Missing/Null values in columns"
@@ -79,11 +50,5 @@ for cn in df.columns:
         total = data.select("cnt").agg({"cnt": "sum"}).collect().pop()['sum(cnt)']
         data = data.withColumn("percentage", (data['cnt']/total) * 100)
         data.sort(col('percentage').desc()).show()
-<<<<<<< HEAD
  
-=======
-#chart_hist = df.groupby('Embarked').agg(func.count("*").alias('cnt')).toPandas()
-#get_ipython().magic(u'pylab inline')
-#chart_hist.plot(kind = 'barh', x='Embarked', y='cnt', figsize = (5,5))   
->>>>>>> 94f439b44e12fc3c29604ad2f5991a6e5938a5eb
 
